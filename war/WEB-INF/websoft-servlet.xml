@@ -17,6 +17,7 @@
     <bean name="/hello.htm" class="com.web.controller.HelloController"></bean>
     
     <!-- <bean name="/staffList.htm" class="com.web.controller.StaffController"></bean> -->
+    
     <context:component-scan base-package="com.web" />  
    
     <mvc:annotation-driven />  
@@ -25,5 +26,24 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
         <property name="prefix" value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>        
+    </bean>
+    
+    <bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 
+      <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+      <property name="url" value="jdbc:sqlserver://203.118.16.169:1433;databaseName=spice" />
+      <property name="username" value="sa" />
+      <property name="password" value="zsoft+-1234" />
+  	</bean>
+  	
+  	<!-- 配置Spring的JdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+  	
+  	<!-- 配置NamedParameterJdbcTemplate，该对象可以使用具名参数，其没有无参构造器，必须为其构造器指定参数 -->
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"></constructor-arg>
     </bean>
 </beans>

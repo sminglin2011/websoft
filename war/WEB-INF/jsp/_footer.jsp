@@ -11,7 +11,7 @@
 <script type="text/javascript" src="H-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="H-ui/lib/jquery.validation/1.14.0/messages_en.js"></script> 
 <script type="text/javascript" src="H-ui/static/h-ui/js/H-ui.js"></script> 
-<script type="text/javascript" src="H-ui/static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="H-ui/static/h-ui.admin/js/H-ui.admin.js"></script>
 
 <script src="lib/handlebars-v3.0.1.js"></script>
 <!--引入CSS-->

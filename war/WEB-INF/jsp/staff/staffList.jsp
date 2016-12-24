@@ -19,73 +19,32 @@
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
-		<a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a>
+		<a href="javascript:;" onclick="member_add('添加用户','addStaff.htm','','450')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a>
 	</span></div>
 	<div class="mt-20">
-	<table class="table table-border table-bordered table-hover table-bg table-sort">
+	<table id="table1" class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr>
+				<th class="col1">StaffId</th>
+				<th class="col2">Name</th>
+				<th class="col3"></th>
+			</tr>
+		</thead>
+		<tbody>
+		<c:forEach items="${model.list}" var="staff">
+			<tr>
+				<th class="col1"><c:out value="${staff.staffId}"/></th>
+				<td class="col2"><c:out value="${staff.name}"/></td>
+				<td class="col3"></td>
+			</tr>
+		</c:forEach>
+		</tbody>
 	</table>
 	</div>
 </div>
 <%@ include file="/WEB-INF/jsp/_footer.jsp" %>
-<!--定义操作列按钮模板-->
-<script id="tpl" type="text/x-handlebars-template">
-    {{#each func}}
-    <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
-    {{/each}}
-</script>
+
 <script type="text/javascript">
-var tpl = $("#tpl").html();
-//预编译模板
-var template = Handlebars.compile(tpl);
-$(function(){
-	var table = $('.table-sort').dataTable({
-		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-		"bStateSave": true,//状态保存
-		/* "aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]}, //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-		] , */
-		
-		"ajax":"/SND/test.htm",
-		"columns": [
-				{
-				    "data": "<input type='checkbox'>",
-				    "width": "10px",
-				    "title": "<input type='checkbox'>",
-				    render: function(data, type, row, meta) {
-				    	return "<input type='checkbox' value='"+row.name+"'>";
-				    }
-				},
-				{
-				    "data": "email",
-				    "width": "100px",
-				    "title": "ID"
-				},
-				{
-				    "data": "name",
-				    "width": "100px",
-				    "title": "Name"
-				},
-				{
-				    "data": null,
-				    "width": "100px",
-				    "title": "Options",
-				    render: function(data, type, row, meta) {
-				    	return "<input type='button' value='"+row.name+"'>"
-				    }
-				}
-		            ]
-	});
-	$('.table-sort tbody').on( 'click', 'tr', function () {
-		if ( $(this).hasClass('selected') ) {
-			$(this).removeClass('selected');
-		}
-		else {
-			table.$('tr.selected').removeClass('selected');
-			$(this).addClass('selected');
-		}
-	});
-});
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);
